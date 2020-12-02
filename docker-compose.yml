@@ -8,3 +8,19 @@ services:
     volumes:
       - ./client:/app
 
+  api:
+    build: ./api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api:/rails_api
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres_db
+      - POSTGRES_PASSWORD=postgres_db
